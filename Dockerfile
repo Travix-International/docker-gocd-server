@@ -38,6 +38,7 @@ ENV AGENT_KEY="" \
     SERVER_MIN_PERM_GEN=128m \
     GO_SERVER_PORT=8153 \
     GO_SERVER_SSL_PORT=8154 \
+    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y" \
     USER_AUTH=""
 
 # expose ports
