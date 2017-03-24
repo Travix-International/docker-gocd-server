@@ -20,6 +20,7 @@ RUN apk --update-cache upgrade \
     && rm /tmp/go-server.zip \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
     && mkdir -p /var/lib/go-server/plugins/external /var/log/go-server /var/go \
+    && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \
     && curl -fSL "https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/google-oauth-login-2.3.jar" -o /var/lib/go-server/plugins/external/google-oauth-login-2.3.jar \
     && curl -fSL "https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC11/gocd-slack-notifier-1.4.0-RC11.jar" -o /var/lib/go-server/plugins/external/gocd-slack-notifier-1.4.0-RC11.jar
 
