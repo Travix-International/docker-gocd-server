@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-# set user and group
-groupmod -g ${GROUP_ID} ${GROUP_NAME}
-usermod -g ${GROUP_ID} -u ${USER_ID} ${USER_NAME}
+# these 3 vars are used by `/go-server/server.sh`, so we export
+# export SERVER_WORK_DIR="/go-working-dir"
+# export GO_CONFIG_DIR="/go-working-dir/config"
+# export STDOUT_LOG_FILE="/go-working-dir/logs/go-server.out.log"
 
 # log to std out instead of file
 cat >/etc/go/log4j.properties <<EOL
@@ -77,17 +78,6 @@ else
   echo "Directory /etc/go does not exist"
 fi
 
-if [ -d "/k8s-ssh-secret" ]
-then
-
-  echo "Copying files from /k8s-ssh-secret to /var/go/.ssh"
-  mkdir -p /var/go/.ssh
-  cp -Lr /k8s-ssh-secret/* /var/go/.ssh
-
-else
-  echo "Directory /k8s-ssh-secret does not exist"
-fi
-
 if [ -d "/var/go" ]
 then
   echo "Setting owner for /var/go..."
@@ -133,12 +123,12 @@ then
 fi
 
 # update config to point to set the internal ports
-sed -i -e "s/GO_SERVER_PORT=8153/GO_SERVER_PORT=${GO_SERVER_PORT}/" /etc/default/go-server
-sed -i -e "s/GO_SERVER_SSL_PORT=8154/GO_SERVER_SSL_PORT=${GO_SERVER_SSL_PORT}/" /etc/default/go-server
+# sed -i -e "s/GO_SERVER_PORT=8153/GO_SERVER_PORT=${GO_SERVER_PORT}/" /etc/default/go-server
+# sed -i -e "s/GO_SERVER_SSL_PORT=8154/GO_SERVER_SSL_PORT=${GO_SERVER_SSL_PORT}/" /etc/default/go-server
 
 # start go.cd server as go user
 echo "Starting go.cd server..."
-/bin/su - ${USER_NAME} -c "GC_LOG=$GC_LOG JVM_DEBUG=$JVM_DEBUG SERVER_MEM=$SERVER_MEM SERVER_MAX_MEM=$SERVER_MAX_MEM SERVER_MIN_PERM_GEN=$SERVER_MIN_PERM_GEN SERVER_MAX_PERM_GEN=$SERVER_MAX_PERM_GEN GO_NOTIFY_CONF=$GO_NOTIFY_CONF GO_SERVER_SYSTEM_PROPERTIES=$GO_SERVER_SYSTEM_PROPERTIES /usr/share/go-server/server.sh" &
+/bin/su - ${USER_NAME} -c "GC_LOG=$GC_LOG JVM_DEBUG=$JVM_DEBUG SERVER_MEM=$SERVER_MEM SERVER_MAX_MEM=$SERVER_MAX_MEM SERVER_MIN_PERM_GEN=$SERVER_MIN_PERM_GEN SERVER_MAX_PERM_GEN=$SERVER_MAX_PERM_GEN GO_NOTIFY_CONF=$GO_NOTIFY_CONF GO_SERVER_SYSTEM_PROPERTIES=$GO_SERVER_SYSTEM_PROPERTIES /var/lib/go-server/server.sh" &
 
 supid=$!
 

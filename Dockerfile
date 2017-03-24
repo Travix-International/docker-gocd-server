@@ -1,35 +1,35 @@
-FROM travix/base-debian-git-jre8:latest
+FROM alpine:3.5
 
 MAINTAINER Travix
 
 # build time environment variables
-ENV GO_VERSION=17.3.0-4704 \
+ENV GO_VERSION=17.3.0 \
+    GO_BUILD_VERSION=17.3.0-4704 \
     USER_NAME=go \
-    USER_ID=999 \
+    USER_ID=1000 \
     GROUP_NAME=go \
-    GROUP_ID=999
+    GROUP_ID=1000
 
 # install dependencies
-RUN echo "deb http://http.debian.net/debian jessie-backports main" | tee /etc/apt/sources.list.d/jessie-backports.list \
-    && apt-get update \
-    && apt-get install -y \
-        apache2-utils \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# install go server
-RUN groupadd -r -g $GROUP_ID $GROUP_NAME \
-    && useradd -r -g $GROUP_NAME -u $USER_ID -d /var/go $USER_NAME \
-    && curl -fSL "https://download.go.cd/binaries/${GO_VERSION}/deb/go-server_${GO_VERSION}_all.deb" -o go-server.deb \
-    && dpkg -i go-server.deb \
-    && rm -rf go-server.db \
-    && sed -i -e "s/DAEMON=Y/DAEMON=N/" /etc/default/go-server \
+RUN addgroup -g ${GROUP_ID} ${GROUP_NAME} \
+    && adduser -D -u ${USER_ID} -h /var/go -G ${GROUP_NAME} ${USER_NAME} \
+    && apk --update-cache upgrade \
+    && apk add --update-cache \
+      openjdk8-jre-base \
+      git \
+      curl \
+    && rm /var/cache/apk/* \
+    && curl -fSL "https://download.gocd.io/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
+    && unzip /tmp/go-server.zip -d / \
+    && rm /tmp/go-server.zip \
+    && mv go-server-${GO_VERSION} /var/lib/go-server \
     && mkdir -p /var/lib/go-server/plugins/external \
-    && curl -fSL "https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v1.2/google-oauth-login-1.2.jar" -o /var/lib/go-server/plugins/external/google-oauth-login-1.2.jar \
-    && curl -fSL "https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC6/gocd-slack-notifier-1.4.0-RC6.jar" -o /var/lib/go-server/plugins/external/gocd-slack-notifier-1.4.0-RC6.jar
+    && curl -fSL "https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.3/google-oauth-login-2.3.jar" -o /var/lib/go-server/plugins/external/google-oauth-login-2.3.jar \
+    && curl -fSL "https://github.com/ashwanthkumar/gocd-slack-build-notifier/releases/download/v1.4.0-RC11/gocd-slack-notifier-1.4.0-RC11.jar" -o /var/lib/go-server/plugins/external/gocd-slack-notifier-1.4.0-RC11.jar
 
 # runtime environment variables
-ENV AGENT_KEY="" \
+ENV LANG="en_US.utf8" \
+    AGENT_KEY="" \
     GC_LOG="" \
     JVM_DEBUG="" \
     SERVER_MAX_MEM=1024m \
