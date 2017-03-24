@@ -13,6 +13,7 @@ RUN apk --update-cache upgrade \
       git \
       bash \
       curl \
+      openssh-client \
     && rm /var/cache/apk/* \
     && curl -fSL "https://download.gocd.io/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
@@ -36,7 +37,6 @@ ENV LANG="en_US.utf8" \
     GO_SERVER_SSL_PORT=8154 \
     GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y" \
     USER_AUTH="" \
-    HOME="/var/go" \
     GO_CONFIG_DIR="/etc/go"
 
 # expose ports
