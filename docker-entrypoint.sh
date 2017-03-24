@@ -41,7 +41,7 @@ EOL
 if [ -d "/var/lib/go-server/artifacts" ]
 then
   echo "Setting owner for /var/lib/go-server/artifacts..."
-  chown -R root:root /var/lib/go-server/artifacts
+  chown root:root /var/lib/go-server/artifacts
 else
   echo "Directory /var/lib/go-server/artifacts does not exist"
 fi
