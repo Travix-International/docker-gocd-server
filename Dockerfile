@@ -14,6 +14,7 @@ RUN apk --update-cache upgrade \
       bash \
       curl \
       openssh-client \
+      apache2-utils \
     && rm /var/cache/apk/* \
     && curl -fSL "https://download.gocd.io/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
