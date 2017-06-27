@@ -3,8 +3,8 @@ FROM alpine:3.5
 MAINTAINER Travix
 
 # build time environment variables
-ENV GO_VERSION=17.5.0 \
-    GO_BUILD_VERSION=17.5.0-5095
+ENV GO_VERSION=17.6.0 \
+    GO_BUILD_VERSION=17.6.0-5142
 
 # install go.cd server
 RUN apk --update-cache upgrade \
