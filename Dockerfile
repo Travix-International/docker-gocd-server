@@ -22,7 +22,6 @@ RUN apk --update-cache upgrade \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
     && mkdir -p /var/lib/go-server/plugins/external /var/log/go-server /var/go \
     && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \
-    && curl -fSL "https://github.com/gocd-contrib/gocd-oauth-login/releases/download/v2.4/google-oauth-login-2.4.jar" -o /var/lib/go-server/plugins/external/google-oauth-login-2.4.jar \
     && curl -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/1.0.0/google-oauth-authorization-plugin-1.0.0-1.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin-1.0.0-1.jar
 
 # runtime environment variables
