@@ -15,7 +15,7 @@ RUN apk --no-cache upgrade \
       curl \
       openssh-client \
       apache2-utils \
-    && curl -fSL "https://wetransfer.com/downloads/d9e6a545208f77969cea9d9733ff130120170907030358/7d6376097cf3b8c0736462c276097a0f20170907030358/c6a1f5" -o /tmp/go-server.zip \
+    && curl -fSL "https://download.wetransfer.com/eu2/d9e6a545208f77969cea9d9733ff130120170907030358/go-server-17.10.0-5371.zip?token=eyJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWUiOiJkOWU2YTU0NTIwOGY3Nzk2OWNlYTlkOTczM2ZmMTMwMTIwMTcwOTA3MDMwMzU4IiwicHJvZmlsZSI6ImV1MiIsImZpbGVuYW1lIjoiZ28tc2VydmVyLTE3LjEwLjAtNTM3MS56aXAiLCJlc2NhcGVkIjoiZmFsc2UiLCJleHBpcmVzIjoxNTA0NzU0NTEzLCJjYWxsYmFjayI6IntcImZvcm1kYXRhXCI6e1wiYWN0aW9uXCI6XCJodHRwczovL2FwaS53ZXRyYW5zZmVyLmNvbS9hcGkvdjEvdHJhbnNmZXJzL2Q5ZTZhNTQ1MjA4Zjc3OTY5Y2VhOWQ5NzMzZmYxMzAxMjAxNzA5MDcwMzAzNTgvcmVjaXBpZW50cy83ZDYzNzYwOTdjZjNiOGMwNzM2NDYyYzI3NjA5N2EwZjIwMTcwOTA3MDMwMzU4XCJ9LFwiZm9ybVwiOntcInN0YXR1c1wiOltcInBhcmFtXCIsXCJzdGF0dXNcIl0sXCJkb3dubG9hZF9pZFwiOlwiMjg0MDQ5NzQ0NVwifX0iLCJ3YXliaWxsX3VybCI6Imh0dHA6Ly9wcm9kdWN0aW9uLmJhY2tlbmQuc2VydmljZS5ldS13ZXN0LTEud3Q6OTI5Mi93YXliaWxsL3YxLzg4YTRiNDlhNmUwOTIxMzUzNzEyMThiNzQzNWVjOGU0YzI2MGFhOTA3MmQxNTM2Nzc2NjVlZWI2MjEwOSJ9.mZF9c1VuuwrAAm1TZSrWLm9HlJ38C0nO-l0Yh03Hjf4" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
     && rm /tmp/go-server.zip \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
