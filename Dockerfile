@@ -15,7 +15,7 @@ RUN apk --no-cache upgrade \
       curl \
       openssh-client \
       apache2-utils \
-    && curl -fSL "https://download.gocd.io/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
+    && curl -fSL "https://wetransfer.com/downloads/d9e6a545208f77969cea9d9733ff130120170907030358/7d6376097cf3b8c0736462c276097a0f20170907030358/c6a1f5" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
     && rm /tmp/go-server.zip \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
