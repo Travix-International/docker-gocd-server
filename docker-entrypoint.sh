@@ -77,6 +77,8 @@ then
   done
 fi
 
+export GO_SERVER_SYSTEM_PROPERTIES="${GO_SERVER_SYSTEM_PROPERTIES}${GO_SERVER_SYSTEM_PROPERTIES:+ }-Dgo.console.stdout=true"
+
 # run go.cd server
 echo "Starting go.cd server..."
 /bin/bash /var/lib/go-server/server.sh &
