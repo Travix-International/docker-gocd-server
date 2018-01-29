@@ -23,6 +23,8 @@ RUN apk --no-cache upgrade \
     && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \
     && curl -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/2.0.0/google-oauth-authorization-plugin-2.0.0-7.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin-2.0.0-7.jar
 
+COPY logback-include.xml /logback-include.xml
+
 # runtime environment variables
 ENV LANG="en_US.utf8" \
     AGENT_KEY="" \
