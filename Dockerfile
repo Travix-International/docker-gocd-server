@@ -3,8 +3,8 @@ FROM alpine:3.6
 MAINTAINER Travix
 
 # build time environment variables
-ENV GO_VERSION=19.2.0 \
-    GO_BUILD_VERSION=19.2.0-8641
+ENV GO_VERSION=19.3.0 \
+    GO_BUILD_VERSION=19.3.0-8959
 
 # install go.cd server
 RUN apk --no-cache upgrade \
