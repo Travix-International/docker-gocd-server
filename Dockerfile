@@ -9,6 +9,7 @@ ENV GO_VERSION=19.3.0 \
 # install go.cd server
 RUN apk --no-cache upgrade \
     && apk add --no-cache \
+      nss \
       openjdk8-jre-base \
       git \
       bash \
