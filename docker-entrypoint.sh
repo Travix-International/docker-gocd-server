@@ -4,7 +4,7 @@ set -e
 # SIGTERM-handler
 sigterm_handler() {
   # kubernetes sends a sigterm, where nginx needs SIGQUIT for graceful shutdown
-  gopid=$(cat /var/lib/go-server/go-server.pid)
+  gopid=$(cat /var/lib/go-server/run/go-server.pid)
   echo "Gracefully shutting down go.cd server with pid ${gopid}..."
   kill -15 $gopid
   echo "Finished shutting down go.cd server!"
@@ -59,12 +59,12 @@ fi
 
 # run go.cd server
 echo "Starting go.cd server..."
-/bin/bash /var/lib/go-server/server.sh &
+/bin/bash /var/lib/go-server/bin/server &
 
-# store pid
-gopid=$!
-echo "Started go.cd server with pid ${gopid}..."
-echo $gopid > /var/lib/go-server/go-server.pid
+# # store pid
+# gopid=$!
+# echo "Started go.cd server with pid ${gopid}..."
+# echo $gopid > /var/lib/go-server/go-server.pid
 
 # wait until server is up and running
 echo "Waiting for go.cd server to be ready..."
