@@ -14,9 +14,6 @@ sigterm_handler() {
 echo "Setting up signal handlers..."
 trap 'kill ${!}; sigterm_handler' 15 # SIGTERM
 
-# log to std out instead of file
-cp -f /logback-include.xml /etc/go/logback-include.xml
-
 # chown directories that might not have root as owner
 if [ -d "/var/lib/go-server/artifacts" ]
 then
