@@ -28,12 +28,12 @@ setAutoRegisterKey() {
   echo "Go.cd server is ready"
 
   # set agent key in cruise-config.xml
-  echo "Setting agent key..."
-  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /godata/config/cruise-config.xml
-  echo "Done setting agent key"
+  echo "Setting agent auto register key..."
+  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_AUTO_REGISTER_KEY'"\2#' /godata/config/cruise-config.xml
+  echo "Done setting agent auto register key"
 }
 
-if [ -n "$AGENT_KEY" ]
+if [ -n "$AGENT_AUTO_REGISTER_KEY" ]
 then
   setAutoRegisterKey &
 fi

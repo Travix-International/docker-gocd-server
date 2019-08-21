@@ -8,7 +8,7 @@ RUN apk --no-cache upgrade \
       apache2-utils
 
 # runtime environment variables
-ENV AGENT_KEY="" \
+ENV AGENT_AUTO_REGISTER_KEY="" \
     USER_AUTH=""
 
 # copy custom configuration scripts
