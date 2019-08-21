@@ -25,7 +25,7 @@ RUN apk --no-cache upgrade \
     && curl --retry 5 -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/2.0.0/google-oauth-authorization-plugin-2.0.0-7.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin-2.0.0-7.jar \
     && curl --retry 5 -fSL "https://github.com/gocd/kubernetes-elastic-agents/releases/download/v1.0.0/kubernetes-elastic-agent-1.0.0-94.jar" -o /var/lib/go-server/plugins/external/kubernetes-elastic-agent-1.0.0-94.jar
 
-COPY logback-include.xml /logback-include.xml
+COPY logback-include.xml /var/lib/go-server/config/logback-include.xml
 
 # runtime environment variables
 ENV LANG="en_US.utf8" \
