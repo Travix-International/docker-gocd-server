@@ -14,10 +14,6 @@ RUN apk --no-cache upgrade \
 
 # runtime environment variables
 ENV AGENT_KEY="" \
-    SERVER_MAX_MEM=1024m \
-    SERVER_MAX_PERM_GEN=256m \
-    SERVER_MEM=512m \
-    SERVER_MIN_PERM_GEN=128m \
     USER_AUTH=""
 
 # copy custom configuration scripts
