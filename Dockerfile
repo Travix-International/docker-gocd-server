@@ -5,10 +5,7 @@ USER root
 # install dependencies and plugins
 RUN apk --no-cache upgrade \
     && apk add --no-cache \
-      apache2-utils \
-    && mkdir -p /godata/plugins/external \
-    && curl --retry 5 --location --fail https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/2.0.0/google-oauth-authorization-plugin-2.0.0-7.jar > /godata/plugins/external/google-oauth-authorization-plugin.jar \
-    && chown -R 1000 /godata/plugins/external
+      apache2-utils
 
 # runtime environment variables
 ENV AGENT_KEY="" \
