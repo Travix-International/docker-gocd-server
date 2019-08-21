@@ -8,23 +8,17 @@ USER root
 RUN apk --no-cache upgrade \
     && apk add --no-cache \
       apache2-utils \
-    && mkdir -p /godata/plugins/external \
+    && mkdir -p /godata/plugins/external /go-working-dir/plugins/bundled \
     && curl --retry 5 --fail --location --silent --show-error "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/2.0.0/google-oauth-authorization-plugin-2.0.0-7.jar" -o /godata/plugins/external/google-oauth-authorization-plugin-2.0.0-7.jar \
-    && chown -R go:root /godata/plugins/external
+    && chown -R go:root /godata/plugins/external /go-working-dir/plugins/bundled
 
 # runtime environment variables
 ENV AGENT_KEY="" \
-    GC_LOG="" \
-    JVM_DEBUG="" \
     SERVER_MAX_MEM=1024m \
     SERVER_MAX_PERM_GEN=256m \
     SERVER_MEM=512m \
     SERVER_MIN_PERM_GEN=128m \
-    GO_SERVER_PORT=8153 \
-    GO_SERVER_SSL_PORT=8154 \
-    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y" \
-    USER_AUTH="" \
-    GO_CONFIG_DIR="/godata/config"
+    USER_AUTH=""
 
 # copy custom configuration scripts
 COPY --chown=go:root ./custom-configuration.sh /docker-entrypoint.d/
