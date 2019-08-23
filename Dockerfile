@@ -11,6 +11,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       apache2-utils \
       git \
+      libnss3 \
       openssh-client \
       unzip \
     && apt-get clean \
@@ -28,7 +29,7 @@ COPY logback-include.xml /var/lib/go-server/config/logback.xml
 # runtime environment variables
 ENV AGENT_KEY="" \
     JAVA_OPTS="" \
-    GO_SERVER_ARGS="-Dgo.config.repo.gc.periodic=y" \
+    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y" \
     USER_AUTH=""
 
 # expose ports

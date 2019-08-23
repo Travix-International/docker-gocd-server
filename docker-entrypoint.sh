@@ -43,7 +43,7 @@ fi
 
 # run go.cd server
 echo "Starting go.cd server..."
-java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_ARGS} &
+java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_SYSTEM_PROPERTIES} &
 
 # wait until server is up and running
 echo "Waiting for go.cd server to be ready..."
