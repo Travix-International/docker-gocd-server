@@ -1,18 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 set -e
-
-# SIGTERM-handler
-sigterm_handler() {
-  # kubernetes sends a sigterm, where nginx needs SIGQUIT for graceful shutdown
-  gopid=$(cat /var/lib/go-server/run/go-server.pid)
-  echo "Gracefully shutting down go.cd server with pid ${gopid}..."
-  kill -15 $gopid
-  echo "Finished shutting down go.cd server!"
-}
-
-# setup handlers
-echo "Setting up signal handlers..."
-trap 'kill ${!}; sigterm_handler' 15 # SIGTERM
 
 # chown directories that might not have root as owner
 if [ -d "/var/lib/go-server/artifacts" ]
@@ -56,12 +43,7 @@ fi
 
 # run go.cd server
 echo "Starting go.cd server..."
-/bin/bash /var/lib/go-server/bin/server &
-
-# # store pid
-# gopid=$!
-# echo "Started go.cd server with pid ${gopid}..."
-# echo $gopid > /var/lib/go-server/go-server.pid
+java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_ARGS} &
 
 # wait until server is up and running
 echo "Waiting for go.cd server to be ready..."
@@ -76,11 +58,7 @@ echo "Go.cd server is ready"
 if [ -n "$AGENT_KEY" ]
 then
   echo "Setting agent key..."
-  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /etc/go/cruise-config.xml
+  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /var/lib/go-server/config/cruise-config.xml
 fi
 
-# wait forever
-while true
-do
-  tail -f /dev/null & wait ${!}
-done
+wait

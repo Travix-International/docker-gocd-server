@@ -11,4 +11,5 @@
     <root>
         <appender-ref ref="CONSOLE"/>
     </root>
+
 </included>
