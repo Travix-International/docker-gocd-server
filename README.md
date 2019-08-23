@@ -21,16 +21,12 @@ docker run -d \
 
 In order to configure the server with other than default settings you can pass in the following environment variables
 
-| Name                | Description                                                            | Default value |
-| ------------------- | ---------------------------------------------------------------------- | ------------- |
-| AGENT_KEY           | The secret key to set on the server for auto-registration of agents    |               |
-| GC_LOG              | GC Log                                                                 |               |
-| JVM_DEBUG           | JVM Debug                                                              |               |
-| SERVER_MEM          | The -Xms value for the java vm                                         | 512m          |
-| SERVER_MAX_MEM      | The -Xmx value for the java vm                                         | 1024m         |
-| SERVER_MIN_PERM_GEN | The -XX:PermSize value for the java vm                                 | 128m          |
-| SERVER_MAX_PERM_GEN | The -XX:MaxPermSize value for the java vm                              | 256m          |
-| USER_AUTH           | Space separated list of user:password                                  |               |
+| Name                | Description                                                                 | Default value |
+| --------------------------- | ------------------------------------------------------------------- | ------------- |
+| AGENT_KEY                   | The secret key to set on the server for auto-registration of agents |               |
+| USER_AUTH                   | Space separated list of user:password                               |               |
+| JAVA_OPTS                   | To pass additional options to the jvm                               |               |
+| GO_SERVER_SYSTEM_PROPERTIES | Pass additional arguments to go.cd                                  |               |
 
 For setting up autoregistration for agents pass in the AGENT_KEY environment variable with a secret value
 
