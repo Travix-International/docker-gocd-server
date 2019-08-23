@@ -23,7 +23,7 @@ RUN apt-get update \
     && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \
     && curl --retry 5 -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/v3.0.1-28/google-oauth-authorization-plugin-3.0.1-28.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin.jar
 
-COPY logback-include.xml /var/lib/go-server/config/logback.xml
+COPY logback-include.xml /var/lib/go-server/config/
 
 # runtime environment variables
 ENV AGENT_KEY="" \

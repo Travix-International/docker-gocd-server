@@ -41,26 +41,28 @@ then
   done
 fi
 
-# run go.cd server
-echo "Starting go.cd server..."
-java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_SYSTEM_PROPERTIES} &
 
-# wait until server is up and running
-echo "Waiting for go.cd server to be ready..."
-until curl -s -o /dev/null 'http://localhost:8153'
-do
-  sleep 1
-done
+setAutoRegisterKey() {
+  # wait until server is up and running
+  echo "Waiting for go.cd server to be ready..."
+  until curl -s -o /dev/null 'http://localhost:8153'
+  do
+    sleep 1
+  done
 
-echo "Go.cd server is ready"
+  echo "Go.cd server is ready"
 
-# set agent key in cruise-config.xml
+  # set agent key in cruise-config.xml
+  echo "Setting agent auto register key..."
+  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /var/lib/go-server/config/cruise-config.xml
+  echo "Done setting agent auto register key"
+}
+
 if [ -n "$AGENT_KEY" ]
 then
-  echo "Setting agent key..."
-  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /var/lib/go-server/config/cruise-config.xml
+  setAutoRegisterKey &
 fi
 
-wait
-
-echo "Shutting down..."
+# run go.cd server
+echo "Starting go.cd server..."
+exec java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_SYSTEM_PROPERTIES}
