@@ -1,4 +1,4 @@
-FROM adoptopenjdk:11-jre-hotspot
+FROM adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.4_11
 
 MAINTAINER Travix
 
@@ -7,14 +7,14 @@ ENV GO_VERSION=19.7.0 \
     GO_BUILD_VERSION=19.7.0-9567
 
 # install go.cd server
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apk --update-cache upgrade \
+    && apk add --no-cache \
       apache2-utils \
+      bash \
+      curl \
       git \
       openssh-client \
-      unzip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && rm /var/cache/apk/* \
     && curl --retry 5 -fSL "https://download.gocd.org/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
     && rm -rf /tmp/go-server.zip go-server-${GO_VERSION}/wrapper go-server-${GO_VERSION}/wrapper-config go-server-${GO_VERSION}/bin \
