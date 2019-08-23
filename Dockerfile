@@ -11,14 +11,13 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       apache2-utils \
       git \
-      libnss3 \
       openssh-client \
       unzip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && curl --retry 5 -fSL "https://download.gocd.org/binaries/${GO_BUILD_VERSION}/generic/go-server-${GO_BUILD_VERSION}.zip" -o /tmp/go-server.zip \
     && unzip /tmp/go-server.zip -d / \
-    && rm /tmp/go-server.zip \
+    && rm -rf /tmp/go-server.zip go-server-${GO_VERSION}/wrapper go-server-${GO_VERSION}/wrapper-config go-server-${GO_VERSION}/bin \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
     && mkdir -p /var/lib/go-server/plugins/external /var/log/go-server /var/go \
     && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \

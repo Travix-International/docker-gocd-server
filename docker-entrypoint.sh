@@ -62,3 +62,5 @@ then
 fi
 
 wait
+
+echo "Shutting down..."
