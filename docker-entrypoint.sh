@@ -45,7 +45,7 @@ fi
 setAutoRegisterKey() {
   # wait until server is up and running
   echo "Waiting for go.cd server to be ready..."
-  until curl -s -o /dev/null 'http://localhost:8153'
+  until [[ "$(curl --insecure -s -o /dev/null -w ''%{http_code}'' http://localhost:8153/go/api/v1/health)" = "200" ]]
   do
     sleep 1
   done
