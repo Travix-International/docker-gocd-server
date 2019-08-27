@@ -28,7 +28,7 @@ COPY logback-include.xml /var/lib/go-server/config/
 # runtime environment variables
 ENV AGENT_KEY="" \
     JAVA_OPTS="" \
-    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y" \
+    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y -Dgo.security.reauthentication.interval=259200000 -Dgo.sessioncookie.secure=Y" \
     USER_AUTH=""
 
 # expose ports
