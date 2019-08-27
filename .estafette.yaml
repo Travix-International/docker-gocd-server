@@ -9,6 +9,8 @@ pipelines:
   bake:
     image: extensions/docker:stable
     action: build
+    no-cache: true
+    expand-variables: false
     container: ${ESTAFETTE_LABEL_CONTAINER}
     repositories:
     - travix
