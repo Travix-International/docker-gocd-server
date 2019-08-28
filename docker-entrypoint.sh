@@ -65,4 +65,4 @@ fi
 
 # run go.cd server
 echo "Starting go.cd server..."
-exec java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_SYSTEM_PROPERTIES}
+exec java ${JAVA_OPTS} -jar /var/lib/go-server/lib/go.jar ${GO_SERVER_OPTS}

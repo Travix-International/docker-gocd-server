@@ -26,9 +26,9 @@ RUN apk --update-cache upgrade \
 COPY logback-include.xml /var/lib/go-server/config/
 
 # runtime environment variables
-ENV AGENT_KEY="" \
+ENV GO_SERVER_OPTS="-Dgo.config.repo.gc.periodic=y -Dgo.security.reauthentication.interval=259200000 -Dgo.sessioncookie.secure=Y" \
     JAVA_OPTS="" \
-    GO_SERVER_SYSTEM_PROPERTIES="-Dgo.config.repo.gc.periodic=y -Dgo.security.reauthentication.interval=259200000 -Dgo.sessioncookie.secure=Y" \
+    AGENT_KEY="" \
     USER_AUTH=""
 
 # expose ports

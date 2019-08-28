@@ -21,12 +21,12 @@ docker run -d \
 
 In order to configure the server with other than default settings you can pass in the following environment variables
 
-| Name                | Description                                                                 | Default value |
-| --------------------------- | ------------------------------------------------------------------- | ------------- |
-| AGENT_KEY                   | The secret key to set on the server for auto-registration of agents |               |
-| USER_AUTH                   | Space separated list of user:password                               |               |
-| JAVA_OPTS                   | To pass additional options to the jvm                               |               |
-| GO_SERVER_SYSTEM_PROPERTIES | Pass additional arguments to go.cd                                  |               |
+| Name           | Description                                                         | Default value |
+| -------------- | ------------------------------------------------------------------- | ------------- |
+| AGENT_KEY      | The secret key to set on the server for auto-registration of agents |               |
+| USER_AUTH      | Space separated list of user:password                               |               |
+| JAVA_OPTS      | To pass additional options to the jvm                               |               |
+| GO_SERVER_OPTS | Pass additional arguments to go.cd                                  |               |
 
 For setting up autoregistration for agents pass in the AGENT_KEY environment variable with a secret value
 
