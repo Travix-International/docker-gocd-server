@@ -3,8 +3,8 @@ FROM adoptopenjdk/openjdk11:jre-11.0.4_11-alpine
 MAINTAINER Travix
 
 # build time environment variables
-ENV GO_VERSION=19.9.0 \
-    GO_BUILD_VERSION=19.9.0-10194
+ENV GO_VERSION=19.10.0 \
+    GO_BUILD_VERSION=19.10.0-10357
 
 # install go.cd server
 RUN apk --update-cache upgrade \
