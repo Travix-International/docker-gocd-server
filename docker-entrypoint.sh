@@ -54,7 +54,8 @@ setAutoRegisterKey() {
 
   # set agent key in cruise-config.xml
   echo "Setting agent auto register key..."
-  sed -i -e 's/agentAutoRegisterKey="[^"]*" *//' -e 's#\(<server\)\(.*artifactsdir.*\)#\1 agentAutoRegisterKey="'$AGENT_KEY'"\2#' /var/lib/go-server/config/cruise-config.xml
+  sed -i -r "s/agentAutoRegisterKey=\"[^\"]+\"/agentAutoRegisterKey=\"${AGENT_KEY}\"/" /var/lib/go-server/config/cruise-config.xml
+
   echo "Done setting agent auto register key"
 }
 
