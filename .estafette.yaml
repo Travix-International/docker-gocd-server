@@ -46,3 +46,10 @@ pipelines:
     - '#swat-team'
     when:
       status == 'failed'
+
+stages:
+  print-something:
+    image: estafette/cloud-sdk:beta
+    shell: /bin/bash
+    commands:
+    - echo "something"
