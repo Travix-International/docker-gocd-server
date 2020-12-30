@@ -21,7 +21,7 @@ RUN apk --update-cache upgrade \
     && mv go-server-${GO_VERSION} /var/lib/go-server \
     && mkdir -p /var/lib/go-server/plugins/external /var/log/go-server /var/go \
     && sed -i -e "s_root:/root_root:/var/go_" /etc/passwd \
-    && curl --retry 5 -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/v3.0.1-28/google-oauth-authorization-plugin-3.0.1-28.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin.jar
+    && curl --retry 5 -fSL "https://github.com/gocd-contrib/google-oauth-authorization-plugin/releases/download/v3.1.0-52-exp/google-oauth-authorization-plugin-3.1.0-52.jar" -o /var/lib/go-server/plugins/external/google-oauth-authorization-plugin.jar
 
 COPY logback-include.xml /var/lib/go-server/config/
 
