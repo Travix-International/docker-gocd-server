@@ -1,6 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.9_11-alpine
-
-MAINTAINER Travix
+FROM adoptopenjdk/openjdk15:alpine-jre
 
 # build time environment variables
 ENV GO_VERSION=21.2.0 \
