@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk15:alpine-jre
+FROM adoptopenjdk/openjdk15:jre-15.0.2_7-alpine
 
 # build time environment variables
 ENV GO_VERSION=21.2.0 \
